@@ -13,6 +13,5 @@ namespace TechStore.Data
         public DbSet<Product> Products { get; set; }
         public DbSet<Review> Reviews { get; set; }
         public DbSet<User> Users { get; set; }
-
     }
 }
