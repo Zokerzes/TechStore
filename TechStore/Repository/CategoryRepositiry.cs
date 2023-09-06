@@ -18,37 +18,42 @@ namespace TechStore.Repository
 
         public bool CreateCategory(Category category)
         {
-            throw new NotImplementedException();
+            _context.Categories.Add(category);
+            return Save();
         }
 
         public bool DeleteCategory(int id)
         {
-            throw new NotImplementedException();
+            var category = _context.Categories.FirstOrDefault(c => c.Id == id);
+            _context.Categories.Remove(category);
+            return Save();
         }
 
         public ICollection<Category> GetCategories()
         {
-            throw new NotImplementedException();
+            return _context.Categories.ToList();
         }
 
         public Category GetCategory(int id)
         {
-            throw new NotImplementedException();
+            return _context.Categories.FirstOrDefault(x => x.Id == id);
         }
 
         public ICollection<Product> GetProductsByCategoryId(int categoryId)
         {
-            throw new NotImplementedException();
+            return _context.Products.Where(p=>p.CategoryId==categoryId).ToList();
         }
 
         public bool Save()
         {
-            throw new NotImplementedException();
+            var saved = _context.SaveChanges();
+            return saved > 0? true: false;
         }
 
         public bool UpdateCategory(Category category)
         {
-            throw new NotImplementedException();
+            _context.Update(category);
+            return Save();
         }
     }
 }
