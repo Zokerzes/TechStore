@@ -1,13 +1,19 @@
-﻿using TechStore.Interfaces;
+﻿using TechStore.Data;
+using TechStore.Interfaces;
 using TechStore.Models;
 
 namespace TechStore.Repository
 {
-    public class Repositiry : ICategoryRepository
+    public class CategoryRepositiry : ICategoryRepository
     {
-        public bool CategoryExists(int Id)
+        private readonly AppDbContext _context;
+        public CategoryRepositiry(AppDbContext context) 
         {
-            throw new NotImplementedException();
+            _context = context;
+        }
+        public bool CategoryExists(int id)
+        {
+            return _context.Categories.Any(c=> c.Id == id);   
         }
 
         public bool CreateCategory(Category category)
