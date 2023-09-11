@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TechStore.Interfaces;
+using TechStore.Models;
 
 namespace TechStore.Controllers
 {
@@ -13,15 +14,30 @@ namespace TechStore.Controllers
             _categoryRepository = categoryRepository;
         }
 
-        [HttpGet]
-        public IActionResult Hello()
+        [HttpGet("{categoryId}")]  //необязательный параметр в {} и в конце маршрута
+        public IActionResult GetCategoriesById(int categoryId) 
         {
-            return Ok("Hello");
+            var category = _categoryRepository.GetCategory(categoryId);
+            return Ok(category);
+        }
+
+        [HttpGet]
+        public IActionResult GetAllCategoryes()
+        {
+            var categoies = _categoryRepository.GetCategories();
+            return Ok(categoies);
         }
         [HttpPost]
-        public IActionResult AddCategory() 
+        public IActionResult AddCategory(Category category) 
         {
-            
+            if (category == null) return BadRequest(); // если пустая категория
+            if (!_categoryRepository.CreateCategory(category))
+            {
+                return StatusCode(500);
+            }
+            return Ok("Category created succes");
         }
+
+
     }
 }
