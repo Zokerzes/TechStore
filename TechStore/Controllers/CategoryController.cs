@@ -27,6 +27,17 @@ namespace TechStore.Controllers
             var categoies = _categoryRepository.GetCategories();
             return Ok(categoies);
         }
+
+
+        [HttpGet("test")]
+        [HttpGet("word")]
+        [HttpGet("rora/bay")]
+        public IActionResult Test() 
+        {
+            return Ok("Test");
+        }
+
+
         [HttpPost]
         public IActionResult AddCategory(Category category) 
         {

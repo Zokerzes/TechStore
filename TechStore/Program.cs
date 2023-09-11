@@ -9,7 +9,6 @@ builder.Services.AddControllers();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepositiry>();
 
 
-
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
     string connStr = builder.Configuration.GetConnectionString("DefaultConnection");

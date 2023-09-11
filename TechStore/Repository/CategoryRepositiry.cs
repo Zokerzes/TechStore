@@ -7,13 +7,13 @@ namespace TechStore.Repository
     public class CategoryRepositiry : ICategoryRepository
     {
         private readonly AppDbContext _context;
-        public CategoryRepositiry(AppDbContext context) 
+        public CategoryRepositiry(AppDbContext context)
         {
             _context = context;
         }
         public bool CategoryExists(int id)
         {
-            return _context.Categories.Any(c=> c.Id == id);   
+            return _context.Categories.Any(c => c.Id == id);
         }
 
         public bool CreateCategory(Category category)
@@ -41,13 +41,13 @@ namespace TechStore.Repository
 
         public ICollection<Product> GetProductsByCategoryId(int categoryId)
         {
-            return _context.Products.Where(p=>p.CategoryId==categoryId).ToList();
+            return _context.Products.Where(p => p.CategoryId == categoryId).ToList();
         }
 
         public bool Save()
         {
             var saved = _context.SaveChanges();
-            return saved > 0? true: false;
+            return saved > 0 ? true : false;
         }
 
         public bool UpdateCategory(Category category)
