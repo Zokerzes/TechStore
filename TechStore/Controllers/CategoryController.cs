@@ -49,6 +49,24 @@ namespace TechStore.Controllers
             return Ok("Category created succes");
         }
 
+        [HttpDelete("{categoryId}")]
+        public IActionResult DeleteCategory(int categoryId)
+        {
+            if (!_categoryRepository.CategoryExists(categoryId)) return NotFound();
+
+            if (!_categoryRepository.DeleteCategory(categoryId)) return StatusCode(500);
+
+            return Ok();
+        }
+
+        [HttpPut]
+        public IActionResult UpdateCategory(Category category)
+        {
+            if (category== null) return BadRequest();
+            if (!_categoryRepository.UpdateCategory(category)) return StatusCode(500);
+
+            return Ok();
+        }
 
     }
 }
